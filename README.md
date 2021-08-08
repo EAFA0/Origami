@@ -32,10 +32,11 @@ class VideoSpider(Spider):
     }
 
     def parse(self, response, **kwargs):
+        # Some parsing code to get url.
         yield {
             'video_url': "https://www.youtube.com/watch?v=QJie7dTvbjQ",
             'meta': {
-                'download_tool': 'youtube-dl', # value 'you-get' will use you-get
+                'download_tool': 'youtube-dl',  # The value 'you-get' will use you-get
                 'filename': 'QJie7dTvbjQ'
             }
         }
