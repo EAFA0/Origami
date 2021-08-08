@@ -13,7 +13,7 @@ python3 ./setup.py install
  
 ### VideoPipelines
 
-帮助快速开发一个简单的 [Scrapy](https://github.com/scrapy/scrapy) 视频爬虫, 例子 `example/video.py`:
+帮助快速开发一个简单的 [Scrapy](https://github.com/scrapy/scrapy) 视频爬虫, 使用 [Youtube-DL](https://github.com/ytdl-org/youtube-dl) OR [You-Get](https://github.com/soimort/you-get) 下载视频， 例子 `example/video.py`:
 
 ``` python
 from scrapy import Spider
@@ -35,7 +35,7 @@ class VideoSpider(Spider):
         yield {
             'video_url': "https://www.youtube.com/watch?v=QJie7dTvbjQ",
             'meta': {
-                'download_tool': 'youtube-dl',
+                'download_tool': 'youtube-dl', # value 'you-get' will use you-get
                 'filename': 'QJie7dTvbjQ'
             }
         }
@@ -44,12 +44,10 @@ class VideoSpider(Spider):
 在该 py 文件同级目录执行:
 
 ```shell
-scrapy runspider -o output.json ./video.py
+scrapy runspider ./video.py
 ```
 
-视频文件将会被存储在 `VIDEOS_STORE` 下, 且前缀为 `QJie7dTvbjQ`; `item` 信息将会被输出到 `output.json`
+视频文件将会被存储在 `VIDEOS_STORE` 下, 且前缀为 `QJie7dTvbjQ`
 
 > 使用 `youtube-dl` 时不推荐重命名, 会使得 `youtube-dl` 重复下载相同的文件
 , `you-get` 随意
-
-目前支持 [Youtube-DL](https://github.com/ytdl-org/youtube-dl) 和 [You-Get](https://github.com/soimort/you-get) 两种下载工具
